@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        h1{
+            text-align: center;
+            color:teal;
+            font-size: 50px;
+        }
+        #container{
+            height:auto;
+            width:400px;
+            margin:auto;
+            margin-top: 50px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            padding: 20px;
+            padding-bottom: 50px;
+            border-radius: 10px;
+        }
+        #screen{
+            height:70px;
+            width:90%;
+            margin: auto;
+            margin-top: 40px;
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            border-radius: 20px;
+            text-align: right;
+        }
+        #keys{
+            height:auto;
+            width: 90%;
+            margin:auto;
+            margin-top: 20px;
+            display:grid;
+            grid-template-columns: repeat(4,1fr);
+            grid-template-rows: repeat(4,80px);
+            gap:15px;
+        }
+        #keys>div{
+            box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+            border-radius: 20%;
+            font-size: 25px;
+            font-weight: bold;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+        }
+        .black{
+            background-color: black;
+            color: white;
+        }
+        #red{
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1> Calculator </h1>
+    <div id="container">
+        <div id="screen"></div>
+        <div id="keys">
+            <div onclick="appendToDisplay('1')">1</div>
+            <div onclick="appendToDisplay('2')">2</div>
+            <div onclick="appendToDisplay('3')">3</div>
+            <div class="black" onclick="appendToDisplay('+')">+</div>
+            <div onclick="appendToDisplay('4')">4</div>
+            <div onclick="appendToDisplay('5')">5</div>
+            <div onclick="appendToDisplay('6')">6</div>
+            <div class="black" onclick="appendToDisplay('-')">-</div>
+            <div onclick="appendToDisplay('7')">7</div>
+            <div onclick="appendToDisplay('8')">8</div>
+            <div onclick="appendToDisplay('9')">9</div>
+            <div class="black" onclick="appendToDisplay('x')">x</div>
+            <div id="red" onclick="clearDisplay()">AC</div>
+            <div onclick="appendToDisplay('0')">0</div>
+            <div class="black" onclick="calculateResult()">=</div>
+            <div class="black" onclick="appendToDisplay('/')">/</div>
+        </div>
+    </div>
+    
+</body>
+</html>
+
+<script>
+    
+    let display = document.getElementById("screen");
+    let currentInput = "";
+    let currentOperation = "";
+
+    function appendToDisplay(value) {
+        if(value=='x') value = '*'
+        currentInput += value;
+        display.innerHTML =`<h2> ${currentInput} </h2>`;
+    }
+
+    function clearDisplay() {
+        currentInput = "";
+        display.innerHTML = "";
+    }
+
+    function calculateResult() {
+        try {
+            let result = eval(currentInput);
+            display.innerHTML =`<h2> ${result} </h2>`;
+            currentInput = result;
+        } catch (error) {
+            display.value = "Error";
+            currentInput = "";
+        }
+    }
+</script>
