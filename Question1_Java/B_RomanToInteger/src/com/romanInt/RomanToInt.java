@@ -13,11 +13,13 @@ public class RomanToInt {
 		System.out.println("Enter a valid roman no.");
 
 		String roman = sc.next();
-		
+
 		int ans = romanToInt(roman);
 		
-		System.out.println(ans);
-		
+		if (ans != -1)
+			System.out.println(ans);
+		else
+			System.out.println("Not a valid Roman No.");
 		sc.close();
 
 	}
@@ -47,7 +49,7 @@ public class RomanToInt {
 				return -1;
 			}
 			int currentValue = romanMap.get(str.charAt(i));
- 
+
 			if (currentValue < prevValue) {
 				result -= currentValue;
 			} else {
